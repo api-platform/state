@@ -182,7 +182,7 @@ class DeserializeProviderTest extends TestCase
         $handler->expects($this->once())->method('handle')->with($exception, $operation)
             ->willThrowException(new \LogicException('handler-threw'));
 
-        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, null, $handler);
+        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, $handler);
         $request = new Request(content: '{"status":"invalid"}');
         $request->headers->set('CONTENT_TYPE', 'application/json');
         $request->attributes->set('input_format', 'json');
@@ -211,7 +211,7 @@ class DeserializeProviderTest extends TestCase
         $handler->expects($this->once())->method('handle')->with($partialException, $operation)
             ->willThrowException(new \LogicException('handler-threw-partial'));
 
-        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, null, $handler);
+        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, $handler);
         $request = new Request(content: '{"status":"invalid"}');
         $request->headers->set('CONTENT_TYPE', 'application/json');
         $request->attributes->set('input_format', 'json');
@@ -262,7 +262,7 @@ class DeserializeProviderTest extends TestCase
         $handler = $this->createMock(DenormalizationViolationFactoryInterface::class);
         $handler->expects($this->once())->method('handle');
 
-        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, null, $handler);
+        $provider = new DeserializeProvider($decorated, $serializer, $serializerContextBuilder, $handler);
         $request = new Request(content: '{"status":"invalid"}');
         $request->headers->set('CONTENT_TYPE', 'application/json');
         $request->attributes->set('input_format', 'json');

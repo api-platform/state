@@ -25,7 +25,6 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class DeserializeProvider implements ProviderInterface, StopwatchAwareInterface
 {
@@ -35,12 +34,8 @@ final class DeserializeProvider implements ProviderInterface, StopwatchAwareInte
         private readonly ?ProviderInterface $decorated,
         private readonly SerializerInterface $serializer,
         private readonly SerializerContextBuilderInterface $serializerContextBuilder,
-        ?TranslatorInterface $translator = null,
         private readonly ?DenormalizationViolationFactoryInterface $violationFactory = null,
     ) {
-        if (null !== $translator) {
-            trigger_deprecation('api-platform/core', '4.4', 'Passing a "%s" to "%s" is deprecated and will be removed in 5.0. Translation is now handled by "%s".', TranslatorInterface::class, self::class, DenormalizationViolationFactoryInterface::class);
-        }
     }
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
