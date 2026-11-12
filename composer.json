@@ -84,7 +84,7 @@
     "suggest": {
         "symfony/web-link": "To support adding web links to the response headers.",
         "symfony/http-foundation": "To use our HTTP providers and processor.",
-        "willdurand/negotiation": "To use the API Platform content negoatiation provider.",
+        "willdurand/negotiation": "To use the API Platform content negotiation provider.",
         "api-platform/serializer": "To use API Platform serializer.",
         "api-platform/validator": "To use API Platform validation."
     },
